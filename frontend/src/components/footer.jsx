@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mail, Phone, Linkedin } from 'lucide-react';
-import "/styles/footer.css"; // Import the CSS file
+import "../styles/footer.css"; // Import the CSS file
 
 const Footer = () => {
   return (
