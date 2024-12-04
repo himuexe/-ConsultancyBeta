@@ -57,7 +57,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="footer-copyright">
-          <p>&copy; {new Date().getFullYear()} TechStartup. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Smartline Services Pvt. Ltd.. All rights reserved.</p>
         </div>
       </div>
     </footer>
