@@ -13,14 +13,13 @@ function aboutUs() {
             </div>
             <div className="ml-0 sm:ml-10 md:ml-16 text-black-700">
               <p className="mb-4">
-                At Smartline Systems, we're dedicated to revolutionizing the way businesses approach their technological challenges. Founded in 2010, we've been at the forefront of providing innovative solutions tailored to each client's unique needs.
+              Smartline Systems Pvt. Ltd. is an innovative tech startup at the forefront of Cloud Computing and Artificial Intelligence (AI), dedicated to delivering cutting-edge solutions that empower businesses to achieve unparalleled success in today's competitive landscape. With a deep commitment to excellence, Smartline Systems stands as a beacon of professionalism and expertise across all functions.
               </p>
               <p className="mb-4">
-                Our team of experts brings together years of experience across various industries, allowing us to offer cutting-edge services in training, development, consulting, and outsourcing. We pride ourselves on our commitment to excellence, customer satisfaction, and staying ahead of technological advancements.
+              Founded by a team of passionate tech enthusiasts, the company initially focused on product development and quickly evolved into a dynamic force in the tech industry. Smartline Systems offers a unique platform for career growth, fostering a customer-centric and employee-focused environment that equips its team with the latest technological tools and resources. This nurturing atmosphere promotes a culture of passion, creativity, and dedication.
               </p>
               <p>
-                Whether you're a startup looking to make your mark or an established enterprise aiming to optimize your operations, Smartline Systems is your trusted partner in navigating the complex world of technology. Let us empower your business with smart, efficient, and scalable solutions that drive growth and success.
-              </p>
+              In addition to its core offerings, Smartline Systems specializes in providing comprehensive training and consulting services, ensuring both employees and clients are equipped with the knowledge and skills to navigate the ever-evolving technological landscape. Our unwavering commitment to excellence drives us to continually push boundaries and deliver innovative solutions that meet the evolving needs of our customers.              </p>
             </div>
           </div>
         </div>
