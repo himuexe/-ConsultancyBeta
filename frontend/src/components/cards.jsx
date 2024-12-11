@@ -19,11 +19,11 @@ const internsData = [
     id: 2,
     name: 'Akash',
     image: akash,
-    email: 'akash@company.com',
-    phone: '+91 9876543210',
+    email: 'akashsaminathan24@gmail.com',
+    phone: '+91 9840729884',
     resumeLink: '#',
-    role: 'Design Intern',
-    skills: ['UI/UX', 'Figma', 'Adobe XD']
+    role: 'Frontend Intern',
+    skills: ['Next.js', 'React', 'Tailwind']
   },
   {
     id: 3,
