@@ -2,14 +2,60 @@ import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import Navbar from '../components/Nav';
 import { Link } from 'react-router-dom';
+import axios from "axios";
+
+function canStoreData(data) {
+    try {
+        const quota = 5242880; // Example: 5MB limit
+        const used = JSON.stringify(localStorage).length;
+        const dataSize = JSON.stringify(data).length;
+        return used + dataSize <= quota;
+    } catch (e) {
+        return false;
+    }
+}
+
+const storeToken = (token) => {
+    try {
+        localStorage.setItem("token", token);
+    } catch (e) {
+        try {
+            sessionStorage.setItem("token", token);
+        } catch (e2) {
+            console.error("Both storage methods failed");
+            throw e2;
+        }
+    }
+};
 
 const LoginPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [data, setData] = useState({
+    email: "",
+    password: ""
+  });
 
-  const handleSubmit = (e) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("")
+
+  const handleChange = ({ currentTarget: input}) => {
+    setData({...data,[input.name]:input.value});
+  }
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    try {
+        const url = "http://localhost:8080/api/auth";
+        const { data: res } = await axios.post(url, data);
+        localStorage.setItem("token", res.data);
+        window.location = "/";
+    } catch (error) {
+        if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status <= 500
+        ) {
+            setError(error.response.data.message);
+        }
+    }
   };
 
   return (<div className="">
@@ -34,8 +80,9 @@ const LoginPage = () => {
                 <input
                   id="email"
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name = "email"
+                  value={data.email}
+                  onChange={handleChange}
                   required
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200 outline-none"
                   placeholder="Enter your email"
@@ -51,9 +98,10 @@ const LoginPage = () => {
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <input
                   id="password"
+                  name = "password"
                   type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={data.password}
+                  onChange={handleChange}
                   required
                   className="w-full pl-10 pr-12 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200 outline-none"
                   placeholder="Enter your password"

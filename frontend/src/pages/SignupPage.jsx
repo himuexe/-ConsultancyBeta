@@ -1,16 +1,39 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Navbar from '../components/Nav';
 
 const SignUpPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [data, setData] = useState({
+    fullName: "",
+    email: "",
+    password: ""
+  });
 
-  const handleSubmit = (e) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = ({ currentTarget: input}) => {
+    setData({...data,[input.name]:input.value});
+  }
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    try{
+      const url = "http://localhost:8080/api/users";
+      const {data: res} = await axios.post(url, data);
+      navigate("/login")
+      console.log(res.message);
+    }catch(error){
+      if(error.response && 
+        error.response.status>=400 &&
+        error.response.status <= 500
+      ){
+        setError(error.response.data.message)
+      }
+    }
+
   };
 
   return (
@@ -36,8 +59,9 @@ const SignUpPage = () => {
                   <input
                     id="name"
                     type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    name='fullName'
+                    value={data.fullName}
+                    onChange={handleChange}
                     required
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200 outline-none"
                     placeholder="Enter your full name"
@@ -54,8 +78,9 @@ const SignUpPage = () => {
                   <input
                     id="email"
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    name = "email"
+                    value={data.email}
+                    onChange={handleChange}
                     required
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200 outline-none"
                     placeholder="Enter your email"
@@ -71,9 +96,10 @@ const SignUpPage = () => {
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                   <input
                     id="password"
+                    name = "password"
                     type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={data.password}
+                    onChange={handleChange}
                     required
                     className="w-full pl-10 pr-12 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200 outline-none"
                     placeholder="Create a password"
@@ -101,6 +127,9 @@ const SignUpPage = () => {
                 </label>
               </div>
 
+              {error && <div className="p-3 mb-4 text-sm text-red-500 bg-red-50 rounded-lg border border-red-200">
+                {error}
+              </div>}
               <button
                 type="submit"
                 className="w-full bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 focus:ring-4 focus:ring-orange-300 transition-all duration-200 font-medium"
