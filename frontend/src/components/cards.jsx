@@ -49,11 +49,11 @@ const internsData = [
     id: 4,
     name: "Sampreeth",
     image: sampreeth,
-    email: "sampreeth@company.com",
-    phone: "+91 7654321098",
-    resumeLink: "#",
-    role: "Backend Developer",
-    skills: ["Python", "Django", "PostgreSQL"],
+    email: "saisampreeth56@gmail.com",
+    phone: "+91 8008328282",
+    resumeLink: "https://drive.google.com/file/d/1LKGcxYj2dxLQEPqsD134PmhGJlpM0PmJ/view?usp=sharing",
+    role: "Software Engineering Intern",
+    skills: ["Python", "Machine Learning", "Express", "MySQL","Java"],
   },
 ];
 
