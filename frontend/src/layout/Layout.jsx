@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from "../components/Footer.jsx";
+import Footer from "../components/footer.jsx";
 import Nav from "../components/Nav.jsx";
 
 const Layout = ({children}) => {
