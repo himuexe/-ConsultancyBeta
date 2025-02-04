@@ -1,5 +1,5 @@
 import Hero from '../components/Hero'
-import Services from '../components/Services'
+import Services from '../components/services'
 import SubServices from '../components/SubServices'
 import AboutUs from '../components/AboutUs'
 import Intersngrid from '../components/cards'
