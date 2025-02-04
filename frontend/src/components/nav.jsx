@@ -1,16 +1,13 @@
-import React, { useState, useCallback } from "react";
+import React, { useState} from "react";
 import { motion } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { useAppContext } from "../contexts/AppContext";
-import { useMutation, useQueryClient } from "react-query";
-import * as apiClient from "../api/Api-Client";
+import { Link } from "react-router-dom";
+
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn } = useAppContext();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
+
   const navItems = [
     { name: "About Us", href: "/about" },
     { name: "Services", href: "/services" },
@@ -19,16 +16,6 @@ const Navbar = () => {
     { name: "Contact", href: "/contact" },
   ];
 
-  const signOutMutation = useMutation(apiClient.signOut, {
-    onSuccess: async () => {
-      await queryClient.invalidateQueries("validateToken");
-      navigate("/");
-    },
-  });
-
-  const handleSignOut = useCallback(() => {
-    signOutMutation.mutate();
-  }, [signOutMutation]);
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -101,33 +88,6 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {isLoggedIn ? (
-            <button
-              className="bg-gray-600 text-white px-4 py-2 
-            rounded-lg 
-            hover:bg-orange-600 
-            transition-colors 
-            duration-300 
-            shadow-md 
-            hover:shadow-lg"
-              onClick={() => handleSignOut()}
-            >
-              Logout
-            </button>
-          ) : (
-            <a
-              href="login"
-              className="bg-orange-500 text-white px-4 py-2 
-            rounded-lg 
-            hover:bg-orange-600 
-            transition-colors 
-            duration-300 
-            shadow-md 
-            hover:shadow-lg"
-            >
-              Log in
-            </a>
-          )}
         </motion.div>
 
         {isOpen && (
@@ -150,30 +110,6 @@ const Navbar = () => {
                   {item.name}
                 </a>
               ))}
-              {isLoggedIn ? (
-                <button
-                  className="bg-gray-600 text-white px-4 py-2 
-                rounded-lg 
-                text-center 
-                hover:bg-orange-600 
-                transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Logout
-                </button>
-              ) : (
-                <a
-                  href="login"
-                  className="bg-orange-500 text-white px-4 py-2 
-                rounded-lg 
-                text-center 
-                hover:bg-orange-600 
-                transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Log in
-                </a>
-              )}
             </div>
           </motion.div>
         )}
