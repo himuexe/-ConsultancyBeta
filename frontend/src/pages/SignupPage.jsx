@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import Navbar from '../components/Nav';
+import Navbar from '../components/nav';
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api/Api-Client";
